@@ -1,4 +1,12 @@
+function isDefaultProp(defaultProps, key, value) {
+  if (!defaultProps) {
+    return false;
+  }
+  return defaultProps[key] === value;
+}
+
 function jsxToString(component, options) {
+
   let componentData = {
     name: component.type.displayName || component.type
   };
@@ -10,7 +18,8 @@ function jsxToString(component, options) {
   if (component.props) {
     componentData.props = Object.keys(component.props).map(
       (key) => {
-        if (key === 'children') {
+        if (key === 'children' ||
+          isDefaultProp(component.type.defaultProps, key, component.props[key])) {
           return '';
         } else {
           let value = component.props[key];

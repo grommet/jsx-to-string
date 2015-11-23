@@ -11,6 +11,21 @@ let Basic = React.createClass({
   }
 });
 
+let DefaultProp = React.createClass({
+
+  getDefaultProps() {
+    return {
+      test2: 'abc'
+    };
+  },
+
+  render() {
+    return (
+      <div />
+    );
+  }
+});
+
 let BasicChild = React.createClass({
   render() {
     return (
@@ -25,6 +40,14 @@ test('test a basic react component', function(t) {
   let basicOutput = jsxToString(<Basic />);
 
   t.equal(basicOutput, '<Basic />');
+});
+
+test('test a basic react component with default props', function(t) {
+  t.plan(1);
+
+  let defaultPropOutput = jsxToString(<DefaultProp test="abc" />);
+
+  t.equal(defaultPropOutput, '<DefaultProp test="abc" />');
 });
 
 test('test a react component with basic props', function(t) {
