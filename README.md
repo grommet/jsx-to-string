@@ -2,6 +2,8 @@
 
 Parse your React JSX components to string
 
+[![Build Status](https://api.travis-ci.org/alansouzati/jsx-to-string.svg)](https://travis-ci.org/alansouzati/jsx-to-string)
+
 ### Install
 
 `npm install jsx-to-string`
