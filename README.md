@@ -6,11 +6,13 @@ Parse your React JSX components to string
 
 ### Install
 
-`npm install jsx-to-string`
+```sh
+npm install jsx-to-string
+```
 
 ### Usage
 
-```
+```js
 import React from 'react';
 import jsxToString from 'jsx-to-string';
 // or var jsxToString = require('jsx-to-string').default;
@@ -28,13 +30,13 @@ console.log(jsxToString(<Basic test1="test" />)); //outputs: <Basic test1="test"
 
 ### Options
 
-  1. Function Value
+  1. functionValue
   
     The default value for function props is `...`.
 
-    This key allows to replace `...` by custom variable names, for example:
+    This key allows you to replace `...` by custom variable names, for example:
 
-```
+```js
 import React from 'react';
 import jsxToString from 'jsx-to-string';
 //or var jsxToString = require('jsx-to-string').default;
