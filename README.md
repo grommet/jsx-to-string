@@ -36,6 +36,7 @@ console.log(jsxToString(<Basic test1="test" />)); //outputs: <Basic test1="test"
 ```
 import React from 'react';
 import jsxToString from 'jsx-to-string';
+//or var jsxToString = require('jsx-to-string').default;
 
 let Basic = React.createClass({
   render() {
