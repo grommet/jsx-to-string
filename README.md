@@ -13,6 +13,7 @@ Parse your React JSX components to string
 ```
 import React from 'react';
 import jsxToString from 'jsx-to-string';
+// or var jsxToString = require('jsx-to-string').default;
 
 let Basic = React.createClass({
   render() {
