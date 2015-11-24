@@ -28,13 +28,15 @@ let Basic = React.createClass({
 console.log(jsxToString(<Basic test1="test" />)); //outputs: <Basic test1="test" />
 ```
 
+### Defaults
+
+  1. The default value for function is `...`. Use `keyValueOverride` for custom key values.
+
 ### Options
 
-  1. functionValue
-  
-    The default value for function props is `...`.
+  1. keyValueOverride
 
-    This key allows you to replace `...` by custom variable names, for example:
+    This key allows you to replace the current key value, for example:
 
 ```js
 import React from 'react';
@@ -53,7 +55,7 @@ let _onClickHandler = function () {
   //no-op
 }
 console.log(jsxToString(<Basic onClick={_onClickHandler} />, {
-  functionValue: {
+  keyValueOverride: {
     onClick: '_onClickHandler'
   }
 })); //outputs: <Basic onClick={_onClickHandler} />

@@ -85,7 +85,7 @@ test('test a react component with custom name function', function(t) {
 
   let funcOutput = jsxToString(
     <Basic test1={_testCallBack1} test2={_testCallBack2} />, {
-      functionValue: {
+      keyValueOverride: {
         test1: '_testCallBack1',
         test2: '_testCallBack2'
       }
@@ -100,14 +100,11 @@ test('test a react component with react children', function(t) {
 
   let funcOutput = jsxToString(
     <Basic>
-      <BasicChild>
-        <BasicChild />
-      </BasicChild>
       <BasicChild />
     </Basic>
   );
 
-  t.equal(funcOutput, '<Basic>\n  <BasicChild>\n    <BasicChild />\n  </BasicChild>\n  <BasicChild />\n</Basic>');
+  t.equal(funcOutput, '<Basic>\n  <BasicChild />\n</Basic>');
 });
 
 test('test a react component with text children', function(t) {
@@ -125,13 +122,15 @@ test('test a react component with multiple children', function(t) {
 
   let funcOutput = jsxToString(
     <Basic>
-      Test
-      <h1>Abc</h1>
-      <BasicChild test1="abc">
-        <Basic test2="www" />
+      <BasicChild>
+        <BasicChild>
+          <BasicChild>
+            Title
+          </BasicChild>
+        </BasicChild>
       </BasicChild>
     </Basic>
   );
 
-  t.equal(funcOutput, '<Basic>\n  Test\n  <h1>\n    Abc\n  </h1>\n  <BasicChild test1="abc">\n    <Basic test2="www" />\n  </BasicChild>\n</Basic>');
+  t.equal(funcOutput, '<Basic>\n  <BasicChild>\n    <BasicChild>\n      <BasicChild>\n        Title\n      </BasicChild>\n    </BasicChild>\n  </BasicChild>\n</Basic>');
 });
