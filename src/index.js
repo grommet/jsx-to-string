@@ -43,21 +43,22 @@ function jsxToString(component, options) {
 
   if (component.props.children) {
     opts.spacing = 2;
+    var textIndentation = new Array(opts.spacing + 1).join(' ');
     if (typeof component.props.children === 'string') {
-      componentData.children = indentation + component.props.children;
+      componentData.children = textIndentation + component.props.children;
     } else if (typeof component.props.children === 'object' &&
       !Array.isArray(component.props.children)) {
       componentData.children = jsxToString(component.props.children, opts);
     } else {
       componentData.children = component.props.children.map((child) => {
         if (typeof child === 'string') {
-          return child;
+          return textIndentation + child;
         } else {
           return jsxToString(child, opts);
         }
       }).join('\n');
     }
-    return `${indentation}<${componentData.name}${componentData.props}>\n  ${componentData.children}\n${indentation}</${componentData.name}>`;
+    return `${indentation}<${componentData.name}${componentData.props}>\n${indentation}${componentData.children}\n${indentation}</${componentData.name}>`;
   } else {
     return `${indentation}<${componentData.name}${componentData.props} />`;
   }

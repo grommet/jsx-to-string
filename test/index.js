@@ -95,6 +95,21 @@ test('test a react component with custom name function', function(t) {
   t.equal(funcOutput, '<Basic test1={_testCallBack1} test2={_testCallBack2} />');
 });
 
+test('test a react component with react children', function(t) {
+  t.plan(1);
+
+  let funcOutput = jsxToString(
+    <Basic>
+      <BasicChild>
+        <BasicChild />
+      </BasicChild>
+      <BasicChild />
+    </Basic>
+  );
+
+  t.equal(funcOutput, '<Basic>\n  <BasicChild>\n    <BasicChild />\n  </BasicChild>\n  <BasicChild />\n</Basic>');
+});
+
 test('test a react component with text children', function(t) {
   t.plan(1);
 
