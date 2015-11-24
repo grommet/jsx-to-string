@@ -127,10 +127,13 @@ test('test a react component with multiple children', function(t) {
           <BasicChild>
             Title
           </BasicChild>
+          <BasicChild>
+            Title 2
+          </BasicChild>
         </BasicChild>
       </BasicChild>
     </Basic>
   );
 
-  t.equal(funcOutput, '<Basic>\n  <BasicChild>\n    <BasicChild>\n      <BasicChild>\n        Title\n      </BasicChild>\n    </BasicChild>\n  </BasicChild>\n</Basic>');
+  t.equal(funcOutput, '<Basic>\n  <BasicChild>\n    <BasicChild>\n      <BasicChild>\n        Title\n      </BasicChild>\n      <BasicChild>\n        Title 2\n      </BasicChild>\n    </BasicChild>\n  </BasicChild>\n</Basic>');
 });

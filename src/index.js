@@ -52,7 +52,7 @@ function jsxToString(component, options) {
         } else {
           return jsxToString(child, opts);
         }
-      }).join('\n');
+      }).join(`\n${indentation}`);
     }
     return `<${componentData.name}${componentData.props}>\n${indentation}${componentData.children}\n${indentation.slice(0, -2)}</${componentData.name}>`;
   } else {
