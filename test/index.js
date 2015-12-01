@@ -72,6 +72,17 @@ test('test a react component with function props', function(t) {
   t.equal(funcOutput, '<Basic test1={...} />');
 });
 
+test('test a react component with react props', function(t) {
+  t.plan(1);
+
+  let _testCallBack = function () {
+    //no-op
+  };
+  let funcOutput = jsxToString(<Basic test1={<Basic />} />);
+
+  t.equal(funcOutput, '<Basic test1={<Basic />} />');
+});
+
 test('test a react component with custom name function', function(t) {
   t.plan(1);
 

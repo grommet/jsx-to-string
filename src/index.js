@@ -1,3 +1,5 @@
+var React = require('react');
+
 function isDefaultProp(defaultProps, key, value) {
   if (!defaultProps) {
     return false;
@@ -26,6 +28,8 @@ function jsxToString(component, options) {
           let value = component.props[key];
           if (typeof value === 'string') {
             return ` ${key}="${value}"`;
+          } else if (React.isValidElement(value)) {
+            value = jsxToString(value, opts);
           } else if (typeof value === 'object') {
             value = JSON.stringify(value, null, 2);
           } else if (typeof value === 'function') {
