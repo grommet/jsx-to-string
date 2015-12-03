@@ -1,6 +1,6 @@
 {
   "name": "jsx-to-string",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Parse your React JSX component to string",
   "main": "lib/index.js",
   "scripts": {
@@ -25,7 +25,8 @@
   },
   "homepage": "https://github.com/alansouzati/jsx-to-string#readme",
   "dependencies": {
-    "react": "^0.14.0"
+    "react": "^0.14.0",
+    "json-stringify-pretty-compact": "^1.0.1"
   },
   "devDependencies": {
     "babel-cli": "^6.1.18",

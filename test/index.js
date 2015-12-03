@@ -58,7 +58,7 @@ test('test a react component with basic props', function(t) {
       test5={{abc: "abc"}} test6="" />
   );
 
-  t.equal(propsOutput, '<Basic test="abc" test2={4} test4={true} test5={{\n  "abc": "abc"\n}} test6="" />');
+  t.equal(propsOutput, '<Basic test="abc" test2={4} test4={true} test5={{"abc": "abc"}} test6="" />');
 });
 
 test('test a react component with function props', function(t) {

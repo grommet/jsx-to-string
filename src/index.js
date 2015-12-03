@@ -1,4 +1,5 @@
 var React = require('react');
+var stringify = require('json-stringify-pretty-compact');
 
 function isDefaultProp(defaultProps, key, value) {
   if (!defaultProps) {
@@ -33,7 +34,7 @@ function jsxToString(component, options) {
           } else if (React.isValidElement(value)) {
             value = jsxToString(value, opts);
           } else if (typeof value === 'object') {
-            value = JSON.stringify(value, null, 2);
+            value = stringify(value);
           } else if (typeof value === 'function') {
             value = '...';
           }
