@@ -15,14 +15,16 @@ function jsxToString(component, options) {
 
   let opts = Object.assign({
     spacing: 0,
-    keyValueOverride: {}
+    keyValueOverride: {},
+    ignoreProps: []
   }, options);
 
   if (component.props) {
     componentData.props = Object.keys(component.props).map(
       (key) => {
         if (key === 'children' ||
-          isDefaultProp(component.type.defaultProps, key, component.props[key])) {
+          isDefaultProp(component.type.defaultProps, key, component.props[key]) ||
+          opts.ignoreProps.includes(key)) {
           return '';
         } else {
           let value = component.props[key];

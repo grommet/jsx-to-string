@@ -128,6 +128,20 @@ test('test a react component with text children', function(t) {
   t.equal(funcOutput, '<Basic>\n  Test\n</Basic>');
 });
 
+test('test a react component with ignore props', function(t) {
+  t.plan(1);
+
+  let ignoreOutput = jsxToString(
+    <Basic test1="ignore">Test</Basic>,
+    {
+      ignoreProps: ['test1']
+    }
+  );
+
+  t.equal(ignoreOutput, '<Basic>\n  Test\n</Basic>');
+});
+
+
 test('test a react component with multiple children', function(t) {
   t.plan(1);
 

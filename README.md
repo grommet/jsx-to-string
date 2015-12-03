@@ -34,7 +34,7 @@ console.log(jsxToString(<Basic test1="test" />)); //outputs: <Basic test1="test"
 
 ### Options
 
-  1. keyValueOverride
+  1. keyValueOverride (object)
 
     This key allows you to replace the current key value, for example:
 
@@ -59,6 +59,28 @@ console.log(jsxToString(<Basic onClick={_onClickHandler} />, {
     onClick: '_onClickHandler'
   }
 })); //outputs: <Basic onClick={_onClickHandler} />
+```
+
+  2. ignoreProps (array)
+
+    An array of string keys that should ignored from the JSX string. For example:
+
+```js
+import React from 'react';
+import jsxToString from 'jsx-to-string';
+//or var jsxToString = require('jsx-to-string').default;
+
+let Basic = React.createClass({
+  render() {
+    return (
+      <div />
+    );
+  }
+}); //this is your react component
+
+console.log(jsxToString(<Basic test1="ignore" />, {
+  ignoreProps: ['test1']
+})); //outputs: <Basic />
 ```
 
 ### License
