@@ -34,9 +34,9 @@ console.log(jsxToString(<Basic test1="test" />)); //outputs: <Basic test1="test"
 
 ### Options
 
-  1. keyValueOverride (object)
+  * keyValueOverride (object)
 
-    This key allows you to replace the current key value, for example:
+    A key-value map that overrides the value of any React props with exact match with the given key. For example:
 
 ```js
 import React from 'react';
@@ -61,9 +61,9 @@ console.log(jsxToString(<Basic onClick={_onClickHandler} />, {
 })); //outputs: <Basic onClick={_onClickHandler} />
 ```
 
-  2. ignoreProps (array)
+  * ignoreProps (array)
 
-    An array of string keys that should ignored from the JSX string. For example:
+    An array of string keys that should be ignored from the JSX string. For example:
 
 ```js
 import React from 'react';
