@@ -11,7 +11,7 @@ function isDefaultProp(defaultProps, key, value) {
 function jsxToString(component, options) {
 
   let componentData = {
-    name: component.type.displayName || component.type
+    name: component.type.displayName || component.type.name || component.type
   };
 
   let opts = Object.assign({
