@@ -25,7 +25,7 @@ function jsxToString(component, options) {
       (key) => {
         if (key === 'children' ||
           isDefaultProp(component.type.defaultProps, key, component.props[key]) ||
-            opts.ignoreProps.indexOf(key) > -1) {
+          opts.ignoreProps.indexOf(key) > -1) {
           return '';
         } else {
           let value = component.props[key];
