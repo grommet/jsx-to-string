@@ -162,3 +162,19 @@ test('test a react component with multiple children', function(t) {
 
   t.equal(funcOutput, '<Basic>\n  <BasicChild>\n    <BasicChild>\n      <BasicChild>\n        Title\n      </BasicChild>\n      <BasicChild>\n        Title 2\n      </BasicChild>\n    </BasicChild>\n  </BasicChild>\n</Basic>');
 });
+
+test('test a react component with spread operator', function(t) {
+  t.plan(1);
+
+  let someProps = {
+    prop1: true,
+    prop2: "active"
+  };
+
+  let funcOutput = jsxToString(
+    <Basic {...someProps}/>
+  );
+
+  t.equal(funcOutput, '<Basic prop1={true} prop2="active" />');
+});
+

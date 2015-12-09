@@ -11,7 +11,7 @@ function isDefaultProp(defaultProps, key, value) {
 function jsxToString(component, options) {
 
   let componentData = {
-    name: component.type.displayName || component.type
+    name: component.type.displayName || component.type.name || component.type
   };
 
   let opts = Object.assign({
@@ -25,7 +25,7 @@ function jsxToString(component, options) {
       (key) => {
         if (key === 'children' ||
           isDefaultProp(component.type.defaultProps, key, component.props[key]) ||
-          opts.ignoreProps.includes(key)) {
+          opts.ignoreProps.indexOf(key) > -1) {
           return '';
         } else {
           let value = component.props[key];
