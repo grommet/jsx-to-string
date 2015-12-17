@@ -10,16 +10,19 @@ function isDefaultProp(defaultProps, key, value) {
 
 function jsxToString(component, options) {
 
-  let componentData = {
-    name: component.type.displayName || component.type.name || component.type
-  };
-
   let opts = Object.assign({
-    spacing: 0,
+    displayName: component.type.displayName || component.type.name || component.type,
+    ignoreProps: [],
     keyValueOverride: {},
-    ignoreProps: []
+    spacing: 0,
   }, options);
 
+  let componentData = {
+    name: opts.displayName
+  };
+
+  delete opts.displayName;
+  
   if (component.props) {
     componentData.props = Object.keys(component.props).map(
       (key) => {

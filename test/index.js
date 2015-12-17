@@ -37,28 +37,28 @@ let BasicChild = React.createClass({
 test('test a basic react component', function(t) {
   t.plan(1);
 
-  let basicOutput = jsxToString(<Basic />);
+  let output = jsxToString(<Basic />);
 
-  t.equal(basicOutput, '<Basic />');
+  t.equal(output, '<Basic />');
 });
 
 test('test a basic react component with default props', function(t) {
   t.plan(1);
 
-  let defaultPropOutput = jsxToString(<DefaultProp test="abc" />);
+  let output = jsxToString(<DefaultProp test="abc" />);
 
-  t.equal(defaultPropOutput, '<DefaultProp test="abc" />');
+  t.equal(output, '<DefaultProp test="abc" />');
 });
 
 test('test a react component with basic props', function(t) {
   t.plan(1);
 
-  let propsOutput = jsxToString(
+  let output = jsxToString(
     <Basic test="abc" test2={4} test4={true}
       test5={{abc: "abc"}} test6="" />
   );
 
-  t.equal(propsOutput, '<Basic test="abc" test2={4} test4={true} test5={{"abc": "abc"}} test6="" />');
+  t.equal(output, '<Basic test="abc" test2={4} test4={true} test5={{"abc": "abc"}} test6="" />');
 });
 
 test('test a react component with function props', function(t) {
@@ -67,9 +67,9 @@ test('test a react component with function props', function(t) {
   let _testCallBack = function () {
     //no-op
   };
-  let funcOutput = jsxToString(<Basic test1={_testCallBack} />);
+  let output = jsxToString(<Basic test1={_testCallBack} />);
 
-  t.equal(funcOutput, '<Basic test1={...} />');
+  t.equal(output, '<Basic test1={...} />');
 });
 
 test('test a react component with react props', function(t) {
@@ -78,9 +78,9 @@ test('test a react component with react props', function(t) {
   let _testCallBack = function () {
     //no-op
   };
-  let funcOutput = jsxToString(<Basic test1={<Basic />} />);
+  let output = jsxToString(<Basic test1={<Basic />} />);
 
-  t.equal(funcOutput, '<Basic test1={<Basic />} />');
+  t.equal(output, '<Basic test1={<Basic />} />');
 });
 
 test('test a react component with custom name function', function(t) {
@@ -94,7 +94,7 @@ test('test a react component with custom name function', function(t) {
     //no-op
   };
 
-  let funcOutput = jsxToString(
+  let output = jsxToString(
     <Basic test1={_testCallBack1} test2={_testCallBack2} />, {
       keyValueOverride: {
         test1: '_testCallBack1',
@@ -103,49 +103,49 @@ test('test a react component with custom name function', function(t) {
     }
   );
 
-  t.equal(funcOutput, '<Basic test1={_testCallBack1} test2={_testCallBack2} />');
+  t.equal(output, '<Basic test1={_testCallBack1} test2={_testCallBack2} />');
 });
 
 test('test a react component with react children', function(t) {
   t.plan(1);
 
-  let funcOutput = jsxToString(
+  let output = jsxToString(
     <Basic>
       <BasicChild />
     </Basic>
   );
 
-  t.equal(funcOutput, '<Basic>\n  <BasicChild />\n</Basic>');
+  t.equal(output, '<Basic>\n  <BasicChild />\n</Basic>');
 });
 
 test('test a react component with text children', function(t) {
   t.plan(1);
 
-  let funcOutput = jsxToString(
+  let output = jsxToString(
     <Basic>Test</Basic>
   );
 
-  t.equal(funcOutput, '<Basic>\n  Test\n</Basic>');
+  t.equal(output, '<Basic>\n  Test\n</Basic>');
 });
 
 test('test a react component with ignore props', function(t) {
   t.plan(1);
 
-  let ignoreOutput = jsxToString(
+  let output = jsxToString(
     <Basic test1="ignore">Test</Basic>,
     {
       ignoreProps: ['test1']
     }
   );
 
-  t.equal(ignoreOutput, '<Basic>\n  Test\n</Basic>');
+  t.equal(output, '<Basic>\n  Test\n</Basic>');
 });
 
 
 test('test a react component with multiple children', function(t) {
   t.plan(1);
 
-  let funcOutput = jsxToString(
+  let output = jsxToString(
     <Basic>
       <BasicChild>
         <BasicChild>
@@ -160,7 +160,7 @@ test('test a react component with multiple children', function(t) {
     </Basic>
   );
 
-  t.equal(funcOutput, '<Basic>\n  <BasicChild>\n    <BasicChild>\n      <BasicChild>\n        Title\n      </BasicChild>\n      <BasicChild>\n        Title 2\n      </BasicChild>\n    </BasicChild>\n  </BasicChild>\n</Basic>');
+  t.equal(output, '<Basic>\n  <BasicChild>\n    <BasicChild>\n      <BasicChild>\n        Title\n      </BasicChild>\n      <BasicChild>\n        Title 2\n      </BasicChild>\n    </BasicChild>\n  </BasicChild>\n</Basic>');
 });
 
 test('test a react component with spread operator', function(t) {
@@ -171,10 +171,22 @@ test('test a react component with spread operator', function(t) {
     prop2: "active"
   };
 
-  let funcOutput = jsxToString(
+  let output = jsxToString(
     <Basic {...someProps}/>
   );
 
-  t.equal(funcOutput, '<Basic prop1={true} prop2="active" />');
+  t.equal(output, '<Basic prop1={true} prop2="active" />');
 });
 
+test('test a react component with custom displayName', function(t) {
+  t.plan(1);
+
+  let output = jsxToString(
+    <Basic />,
+    {
+      displayName: 'CustomDisplayName'
+    }
+  );
+
+  t.equal(output, '<CustomDisplayName />');
+});

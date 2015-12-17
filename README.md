@@ -83,6 +83,28 @@ console.log(jsxToString(<Basic test1="ignore" />, {
 })); //outputs: <Basic />
 ```
 
+  * displayName (string)
+
+    A custom value to be used as the component name. For example:
+
+```js
+import React from 'react';
+import jsxToString from 'jsx-to-string';
+//or var jsxToString = require('jsx-to-string').default;
+
+let Basic = React.createClass({
+  render() {
+    return (
+      <div />
+    );
+  }
+}); //this is your react component
+
+console.log(jsxToString(<Basic test1="ignore" />, {
+  displayName: 'CustomName'
+})); //outputs: <CustomName />
+```
+
 ### License
 
 [MIT](https://github.com/alansouzati/jsx-to-string/blob/master/LICENSE)
