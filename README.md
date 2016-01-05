@@ -15,7 +15,7 @@ npm install jsx-to-string
 ```js
 import React from 'react';
 import jsxToString from 'jsx-to-string';
-// or var jsxToString = require('jsx-to-string').default;
+// or var jsxToString = require('jsx-to-string');
 
 let Basic = React.createClass({
   render() {
@@ -41,7 +41,7 @@ console.log(jsxToString(<Basic test1="test" />)); //outputs: <Basic test1="test"
 ```js
 import React from 'react';
 import jsxToString from 'jsx-to-string';
-//or var jsxToString = require('jsx-to-string').default;
+//or var jsxToString = require('jsx-to-string');
 
 let Basic = React.createClass({
   render() {
@@ -68,7 +68,7 @@ console.log(jsxToString(<Basic onClick={_onClickHandler} />, {
 ```js
 import React from 'react';
 import jsxToString from 'jsx-to-string';
-//or var jsxToString = require('jsx-to-string').default;
+//or var jsxToString = require('jsx-to-string');
 
 let Basic = React.createClass({
   render() {
@@ -90,7 +90,7 @@ console.log(jsxToString(<Basic test1="ignore" />, {
 ```js
 import React from 'react';
 import jsxToString from 'jsx-to-string';
-//or var jsxToString = require('jsx-to-string').default;
+//or var jsxToString = require('jsx-to-string');
 
 let Basic = React.createClass({
   render() {
