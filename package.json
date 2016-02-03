@@ -1,6 +1,6 @@
 {
   "name": "jsx-to-string",
-  "version": "0.2.8",
+  "version": "0.2.9",
   "description": "Parse your React JSX component to string",
   "main": "lib/index.js",
   "scripts": {
@@ -32,9 +32,9 @@
     "babel-cli": "^6.1.18",
     "babel-core": "^6.1.18",
     "babel-plugin-add-module-exports": "^0.1.2",
+    "babel-plugin-transform-object-assign": "^6.3.13",
     "babel-preset-es2015": "^6.1.18",
     "babel-preset-react": "^6.1.18",
-    "sinon": "^1.15.4",
     "tape": "^4.0.0"
   }
 }
