@@ -1,6 +1,5 @@
 import React from 'react';
 import jsxToString from '../src/index';
-import sinon from 'sinon';
 import test from 'tape';
 
 let Basic = React.createClass({
