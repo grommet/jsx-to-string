@@ -58,18 +58,19 @@ function jsxToString(component, options) {
       !Array.isArray(component.props.children)) {
       componentData.children = jsxToString(component.props.children, opts);
     } else {
-      componentData.children = component.props.children.map((child) => {
-        if (typeof child === 'string') {
-          return child;
-        } else {
-          return jsxToString(child, opts);
-        }
-      }).join(`\n${indentation}`);
+      componentData.children = component.props.children
+        .filter((child) => child)
+        .map((child) => {
+          return (typeof child === 'string') 
+            ? child
+            : jsxToString(child, opts);
+          })
+        .join(`\n${indentation}`);
     }
     return `<${componentData.name}${componentData.props}>\n${indentation}${componentData.children}\n${indentation.slice(0, -2)}</${componentData.name}>`;
   } else {
     return `<${componentData.name}${componentData.props} />`;
   }
-};
+}
 
 export default jsxToString;

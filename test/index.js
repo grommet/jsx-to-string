@@ -162,6 +162,25 @@ test('test a react component with multiple children', function(t) {
   t.equal(output, '<Basic>\n  <BasicChild>\n    <BasicChild>\n      <BasicChild>\n        Title\n      </BasicChild>\n      <BasicChild>\n        Title 2\n      </BasicChild>\n    </BasicChild>\n  </BasicChild>\n</Basic>');
 });
 
+test('test a react component with a null children', function(t) {
+  t.plan(1);
+
+  let output = jsxToString(
+    <Basic>
+      <BasicChild>
+        <BasicChild>
+          {null}
+          <BasicChild>
+            Title 2
+          </BasicChild>
+        </BasicChild>
+      </BasicChild>
+    </Basic>
+  );
+
+  t.equal(output, '<Basic>\n  <BasicChild>\n    <BasicChild>\n      <BasicChild>\n        Title 2\n      </BasicChild>\n    </BasicChild>\n  </BasicChild>\n</Basic>');
+});
+
 test('test a react component with spread operator', function(t) {
   t.plan(1);
 
