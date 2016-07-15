@@ -1,10 +1,6 @@
 {
   "name": "jsx-to-string",
-<<<<<<< HEAD
   "version": "0.2.13",
-=======
-  "version": "0.2.10",
->>>>>>> parent of 9961dd1... v0.2.12
   "description": "Parse your React JSX component to string",
   "main": "lib/index.js",
   "scripts": {
