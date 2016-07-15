@@ -8,6 +8,24 @@ function isDefaultProp(defaultProps, key, value) {
   return defaultProps[key] === value;
 }
 
+function stringedObject (object, opts) {
+  var result = {};
+  Object.keys(object).map(function (key) {
+    var value = object[key];
+    if (isValidElement(value)) {
+      value = jsxToString(value, opts);
+    } else if (typeof value === 'object') {
+      value = stringedObject(value, opts);
+    } else if (typeof value === 'function') {
+      value = '...';
+    }
+    result[key] = value;
+  });
+  return result;
+}
+
+var _JSX_REGEXP = /"<.+>"/g;
+
 function jsxToString(component, options) {
 
   const baseOpts = {
@@ -39,6 +57,12 @@ function jsxToString(component, options) {
           } else if (React.isValidElement(value)) {
             value = jsxToString(value, opts);
           } else if (typeof value === 'object') {
+            value = stringify(stringedObject(value));
+            // remove string quotes from embeded JSX values
+            value = value.replace(_JSX_REGEXP, function (match) {
+              return match.slice(1, match.length - 1);
+            });
+          } else if (typeof value === 'object') {
             value = stringify(value);
           } else if (typeof value === 'function') {
             value = '...';
@@ -61,7 +85,7 @@ function jsxToString(component, options) {
       componentData.children = component.props.children
         .filter((child) => child)
         .map((child) => {
-          return (typeof child === 'string') 
+          return (typeof child === 'string')
             ? child
             : jsxToString(child, opts);
           })
