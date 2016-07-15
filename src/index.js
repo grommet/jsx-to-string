@@ -12,7 +12,7 @@ function stringedObject (object, opts) {
   var result = {};
   Object.keys(object).map(function (key) {
     var value = object[key];
-    if (isValidElement(value)) {
+    if (React.isValidElement(value)) {
       value = jsxToString(value, opts);
     } else if (typeof value === 'object') {
       value = stringedObject(value, opts);
@@ -57,7 +57,7 @@ function jsxToString(component, options) {
           } else if (React.isValidElement(value)) {
             value = jsxToString(value, opts);
           } else if (typeof value === 'object') {
-            value = stringify(stringedObject(value));
+            value = stringify(stringedObject(value, opts));
             // remove string quotes from embeded JSX values
             value = value.replace(_JSX_REGEXP, function (match) {
               return match.slice(1, match.length - 1);
