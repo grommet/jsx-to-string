@@ -9,18 +9,29 @@ function isDefaultProp(defaultProps, key, value) {
 }
 
 function stringedObject (object, opts) {
-  var result = {};
-  Object.keys(object).map(function (key) {
-    var value = object[key];
-    if (React.isValidElement(value)) {
-      value = jsxToString(value, opts);
-    } else if (typeof value === 'object') {
-      value = stringedObject(value, opts);
-    } else if (typeof value === 'function') {
-      value = '...';
-    }
-    result[key] = value;
-  });
+  var result;
+  if (Array.isArray(object)) {
+    result = object.map(function (item) {
+      return stringedObject(item);
+    });
+  } else {
+    result = {};
+    Object.keys(object).map(function (key) {
+      var value = object[key];
+      if (React.isValidElement(value)) {
+        value = jsxToString(value, opts);
+      } else if (Array.isArray(value)) {
+        value = value.map(function (item) {
+          return stringedObject(item, opts);
+        });
+      } else if (typeof value === 'object') {
+        value = stringedObject(value, opts);
+      } else if (typeof value === 'function') {
+        value = '...';
+      }
+      result[key] = value;
+    });
+  }
   return result;
 }
 
@@ -62,8 +73,6 @@ function jsxToString(component, options) {
             value = value.replace(_JSX_REGEXP, function (match) {
               return match.slice(1, match.length - 1);
             });
-          } else if (typeof value === 'object') {
-            value = stringify(value);
           } else if (typeof value === 'function') {
             value = '...';
           }
