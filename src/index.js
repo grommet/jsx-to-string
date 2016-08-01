@@ -14,7 +14,7 @@ function stringedObject (object, opts) {
     result = object.map(function (item) {
       return stringedObject(item);
     });
-  } else {
+  } else if (typeof object === 'object') {
     result = {};
     Object.keys(object).map(function (key) {
       var value = object[key];
@@ -31,6 +31,8 @@ function stringedObject (object, opts) {
       }
       result[key] = value;
     });
+  } else {
+    result = object;
   }
   return result;
 }
