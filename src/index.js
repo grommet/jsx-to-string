@@ -14,7 +14,7 @@ function stringedObject (object, opts) {
     result = object.map(function (item) {
       return stringedObject(item);
     });
-  } else if (typeof object === 'object') {
+  } else if (object && typeof object === 'object') {
     result = {};
     Object.keys(object).map(function (key) {
       var value = object[key];
