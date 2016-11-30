@@ -57,7 +57,7 @@ test('test a react component with basic props', function(t) {
       test5={{abc: "abc"}} test6="" />
   );
 
-  t.equal(output, '<Basic test="abc" test2={4} test4={true} test5={{"abc": "abc"}} test6="" />');
+  t.equal(output, '<Basic test="abc"\n  test2={4}\n  test4={true}\n  test5={{"abc": "abc"}}\n  test6="" />');
 });
 
 test('test a react component with function props', function(t) {
@@ -102,7 +102,7 @@ test('test a react component with custom name function', function(t) {
     }
   );
 
-  t.equal(output, '<Basic test1={_testCallBack1} test2={_testCallBack2} />');
+  t.equal(output, '<Basic test1={_testCallBack1}\n  test2={_testCallBack2} />');
 });
 
 test('test a react component with react children', function(t) {
@@ -193,7 +193,7 @@ test('test a react component with spread operator', function(t) {
     <Basic {...someProps}/>
   );
 
-  t.equal(output, '<Basic prop1={true} prop2="active" />');
+  t.equal(output, '<Basic prop1={true}\n  prop2="active" />');
 });
 
 test('test a react component with custom displayName', function(t) {
