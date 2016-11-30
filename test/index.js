@@ -208,3 +208,33 @@ test('test a react component with custom displayName', function(t) {
 
   t.equal(output, '<CustomDisplayName />');
 });
+
+test('test a react component with react prop', function(t) {
+  t.plan(1);
+
+  let output = jsxToString(
+    <Basic prop={<Basic />} />
+  );
+
+  t.equal(output, '<Basic prop={<Basic />} />');
+});
+
+test('test a react component with null prop', function(t) {
+  t.plan(1);
+
+  let output = jsxToString(
+    <Basic prop={null} />
+  );
+
+  t.equal(output, '<Basic prop={null} />');
+});
+
+test('test a react component with undefined prop', function(t) {
+  t.plan(1);
+
+  let output = jsxToString(
+    <Basic prop={undefined} />
+  );
+
+  t.equal(output, '<Basic prop={undefined} />');
+});

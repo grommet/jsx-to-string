@@ -12,7 +12,7 @@ function stringedObject (object, opts) {
   let result;
   if (Array.isArray(object)) {
     result = object.map(item => stringedObject(item));
-  } else if (typeof object === 'object') {
+  } else if (object && typeof object === 'object') {
     result = {};
     Object.keys(object).map(key => {
       let value = object[key];
