@@ -70,7 +70,7 @@ function jsxToString (component, options) {
       } else {
         let value = component.props[key];
         if (typeof value === 'string') {
-          return `${key}="${value}"`;
+          return `${key}='${value}'`;
         } else if (React.isValidElement(value)) {
           opts.spacing += 2;
           value = jsxToString(value, opts);
