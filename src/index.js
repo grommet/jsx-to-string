@@ -8,10 +8,10 @@ function isDefaultProp (defaultProps, key, value) {
   return defaultProps[key] === value;
 }
 
-function stringedObject (object, opts) {
+function stringifyObject (object, opts) {
   let result;
   if (Array.isArray(object)) {
-    result = object.map(item => stringedObject(item));
+    result = object.map(item => stringifyObject(item));
   } else if (object && typeof object === 'object') {
     result = {};
     Object.keys(object).map(key => {
@@ -19,11 +19,9 @@ function stringedObject (object, opts) {
       if (React.isValidElement(value)) {
         value = jsxToString(value, opts);
       } else if (Array.isArray(value)) {
-        value = value.map(function (item) {
-          return stringedObject(item, opts);
-        });
+        value = value.map(item => stringifyObject(item, opts));
       } else if (typeof value === 'object') {
-        value = stringedObject(value, opts);
+        value = stringifyObject(value, opts);
       } else if (typeof value === 'function') {
         value = '...';
       }
@@ -36,6 +34,28 @@ function stringedObject (object, opts) {
 }
 
 const _JSX_REGEXP = /"<.+>"/g;
+
+function serializeItem (item, options, delimit=true) {
+  let result;
+  if (typeof item === 'string') {
+    result = delimit ? `'${item}'` : item;
+  } else if (typeof item === 'number' || typeof item === 'boolean') {
+    result = `${item}`;
+  } else if (Array.isArray(item)) {
+    result = `[${item.map(i => serializeItem(i, options)).join(', ')}]`;
+  } else if (React.isValidElement(item)) {
+    result = jsxToString(item, options);
+  } else if (typeof item === 'object') {
+    result = stringify(stringifyObject(item, options));
+    // remove string quotes from embeded JSX values
+    result = result.replace(_JSX_REGEXP, function (match) {
+      return match.slice(1, match.length - 1);
+    });
+  } else if (typeof item === 'function') {
+    result = '...';
+  }
+  return result;
+}
 
 function jsxToString (component, options) {
 
@@ -57,35 +77,19 @@ function jsxToString (component, options) {
 
   if (component.props) {
     var indentation = new Array(opts.spacing + 3).join(' ');
-    componentData.props = Object.keys(component.props).filter(key => {
+    componentData.props = Object.keys(component.props)
+    .filter(key => {
       return (key !== 'children' &&
         ! isDefaultProp(component.type.defaultProps, key,
           component.props[key]) &&
-        ! opts.ignoreProps.indexOf(key) > -1)
+        opts.ignoreProps.indexOf(key) === -1)
     }).map(key => {
-      if (key === 'children' ||
-        isDefaultProp(component.type.defaultProps, key, component.props[key]) ||
-        opts.ignoreProps.indexOf(key) > -1) {
-        return '';
-      } else {
-        let value = component.props[key];
-        if (typeof value === 'string') {
-          return `${key}='${value}'`;
-        } else if (React.isValidElement(value)) {
-          opts.spacing += 2;
-          value = jsxToString(value, opts);
-          opts.spacing -= 2;
-        } else if (typeof value === 'object') {
-          value = stringify(stringedObject(value, opts));
-          // remove string quotes from embeded JSX values
-          value = value.replace(_JSX_REGEXP, function (match) {
-            return match.slice(1, match.length - 1);
-          });
-        } else if (typeof value === 'function') {
-          value = '...';
-        }
-        return `${key}={${opts.keyValueOverride[key] || value}}`
+      let value = opts.keyValueOverride[key] ||
+        serializeItem(component.props[key], opts);
+      if (typeof value !== 'string' || value[0] !== "'") {
+        value = `{${value}}`;
       }
+      return `${key}=${value}`;
     }).join('\n' + indentation);
     if (componentData.props.length > 0) {
       componentData.props = ' ' + componentData.props;
@@ -95,20 +99,14 @@ function jsxToString (component, options) {
   if (component.props.children) {
     opts.spacing += 2;
     let indentation = new Array(opts.spacing + 1).join(' ');
-    if (typeof component.props.children === 'string') {
-      componentData.children = component.props.children;
-    } else if (typeof component.props.children === 'object' &&
-      !Array.isArray(component.props.children)) {
-      componentData.children = jsxToString(component.props.children, opts);
-    } else {
+    if (Array.isArray(component.props.children)) {
       componentData.children = component.props.children
-        .filter((child) => child)
-        .map((child) => {
-          return (typeof child === 'string')
-            ? child
-            : jsxToString(child, opts);
-          })
-        .join(`\n${indentation}`);
+      .filter(child => child)
+      .map(child => serializeItem(child, opts, false))
+      .join(`\n${indentation}`);
+    } else {
+      componentData.children =
+        serializeItem(component.props.children, opts, false);
     }
     return `<${componentData.name}${componentData.props}>\n` +
       `${indentation}${componentData.children}\n` +
