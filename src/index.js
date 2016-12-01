@@ -42,7 +42,10 @@ function serializeItem (item, options, delimit=true) {
   } else if (typeof item === 'number' || typeof item === 'boolean') {
     result = `${item}`;
   } else if (Array.isArray(item)) {
-    result = `[${item.map(i => serializeItem(i, options)).join(', ')}]`;
+    var indentation = new Array(options.spacing + 1).join(' ');
+    const delimiter = delimit ? ', ' : `\n${indentation}`;
+    const items = item.map(i => serializeItem(i, options)).join(delimiter);
+    result = delimit ? `[${items}]` : `${items}` ;
   } else if (React.isValidElement(item)) {
     result = jsxToString(item, options);
   } else if (typeof item === 'object') {
@@ -90,7 +93,7 @@ function jsxToString (component, options) {
         value = `{${value}}`;
       }
       return `${key}=${value}`;
-    }).join('\n' + indentation);
+    }).join(`\n${indentation}`);
     if (componentData.props.length > 0) {
       componentData.props = ' ' + componentData.props;
     }
