@@ -46,7 +46,7 @@ test('test a basic react component with default props', function(t) {
 
   let output = jsxToString(<DefaultProp test="abc" />);
 
-  t.equal(output, '<DefaultProp test="abc" />');
+  t.equal(output, '<DefaultProp test=\'abc\' />');
 });
 
 test('test a react component with basic props', function(t) {
@@ -57,7 +57,7 @@ test('test a react component with basic props', function(t) {
       test5={{abc: "abc"}} test6="" />
   );
 
-  t.equal(output, '<Basic test="abc"\n  test2={4}\n  test4={true}\n  test5={{"abc": "abc"}}\n  test6="" />');
+  t.equal(output, '<Basic test=\'abc\'\n  test2={4}\n  test4={true}\n  test5={{"abc": "abc"}}\n  test6=\'\' />');
 });
 
 test('test a react component with function props', function(t) {
@@ -193,7 +193,7 @@ test('test a react component with spread operator', function(t) {
     <Basic {...someProps}/>
   );
 
-  t.equal(output, '<Basic prop1={true}\n  prop2="active" />');
+  t.equal(output, '<Basic prop1={true}\n  prop2=\'active\' />');
 });
 
 test('test a react component with custom displayName', function(t) {
