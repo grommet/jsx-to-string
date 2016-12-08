@@ -55,7 +55,9 @@ function serializeItem (item, options, delimit=true) {
       return match.slice(1, match.length - 1);
     });
   } else if (typeof item === 'function') {
-    result = '...';
+    result = options.detectFunctions ?
+      item.name && (item.name !== options.key) ? item.name : item.toString() :
+      '...';
   }
   return result;
 }
@@ -67,7 +69,8 @@ function jsxToString (component, options) {
       component.type,
     ignoreProps: [],
     keyValueOverride: {},
-    spacing: 0
+    spacing: 0,
+    detectFunctions: false
   };
 
   let opts = {...baseOpts, ...options};
@@ -88,7 +91,7 @@ function jsxToString (component, options) {
         opts.ignoreProps.indexOf(key) === -1)
     }).map(key => {
       let value = opts.keyValueOverride[key] ||
-        serializeItem(component.props[key], opts);
+        serializeItem(component.props[key], {...opts, key});
       if (typeof value !== 'string' || value[0] !== "'") {
         value = `{${value}}`;
       }
