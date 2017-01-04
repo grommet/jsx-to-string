@@ -105,6 +105,22 @@ test('test a react component with custom name function', function(t) {
   t.equal(output, '<Basic test1={_testCallBack1}\n  test2={_testCallBack2} />');
 });
 
+test('test a react component with autodetection of the functions names', function(t) {
+  t.plan(1);
+
+  let _testCallBack1 = function () {
+    //no-op
+  };
+
+  let output = jsxToString(
+    <Basic test1={_testCallBack1} test2={function() {}} />, {
+      detectFunctions: true
+    }
+  );
+
+  t.equal(output, '<Basic test1={_testCallBack1}\n  test2={function test2() {}} />');
+});
+
 test('test a react component with react children', function(t) {
   t.plan(1);
 
