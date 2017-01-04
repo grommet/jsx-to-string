@@ -63,7 +63,7 @@ console.log(jsxToString(<Basic onClick={_onClickHandler} />, {
 * functionNameOnly (boolean)
 
   Optional. Defaults to false. Whether prop function values should contain only the name.
-  This flag will only be used if `useFunctionCode` is true.
+  This flag will only be used if `useFunctionCode` is set to true.
 
   For example:
 
