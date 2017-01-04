@@ -104,6 +104,7 @@ function jsxToString (component, options) {
     let indentation = new Array(opts.spacing + 1).join(' ');
     if (Array.isArray(component.props.children)) {
       componentData.children = component.props.children
+      .reduce((a, b) => a.concat(b), []) // handle Array of Arrays
       .filter(child => child)
       .map(child => serializeItem(child, opts, false))
       .join(`\n${indentation}`);
