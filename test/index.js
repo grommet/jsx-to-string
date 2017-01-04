@@ -66,9 +66,22 @@ test('test a react component with function props', function(t) {
   let _testCallBack = function () {
     //no-op
   };
+
   let output = jsxToString(<Basic test1={_testCallBack} />);
 
-  t.equal(output, '<Basic test1={...} />');
+  t.equal(
+    output, '<Basic test1={...} />'
+  );
+});
+
+test('test a react component with annonymous function', function(t) {
+  t.plan(1);
+
+  let output = jsxToString(<Basic test1={function() {}} />);
+
+  t.equal(
+    output, '<Basic test1={...} />'
+  );
 });
 
 test('test a react component with react props', function(t) {
@@ -105,7 +118,7 @@ test('test a react component with custom name function', function(t) {
   t.equal(output, '<Basic test1={_testCallBack1}\n  test2={_testCallBack2} />');
 });
 
-test('test a react component with autodetection of the functions names', function(t) {
+test('test a react component with function code enabled', function(t) {
   t.plan(1);
 
   let _testCallBack1 = function () {
@@ -113,12 +126,31 @@ test('test a react component with autodetection of the functions names', functio
   };
 
   let output = jsxToString(
-    <Basic test1={_testCallBack1} test2={function() {}} />, {
-      detectFunctions: true
+    <Basic test1={_testCallBack1} />, {
+      useFunctionCode: true
     }
   );
 
-  t.equal(output, '<Basic test1={_testCallBack1}\n  test2={function test2() {}} />');
+  t.equal(
+    output, '<Basic test1={function _testCallBack1() {\n    //no-op\n  }} />'
+  );
+});
+
+test('test a react component with function name enabled', function(t) {
+  t.plan(1);
+
+  let _testCallBack1 = function () {
+    //no-op
+  };
+
+  let output = jsxToString(
+    <Basic test1={_testCallBack1} />, {
+      useFunctionCode: true,
+      functionNameOnly: true
+    }
+  );
+
+  t.equal(output, '<Basic test1={_testCallBack1} />');
 });
 
 test('test a react component with react children', function(t) {

@@ -23,7 +23,9 @@ function stringifyObject (object, opts) {
       } else if (typeof value === 'object') {
         value = stringifyObject(value, opts);
       } else if (typeof value === 'function') {
-        value = '...';
+        value = opts.useFunctionCode ?
+          opts.functionNameOnly ?
+            item.name.toString() : item.toString() : `...`;
       }
       result[key] = value;
     });
@@ -55,9 +57,9 @@ function serializeItem (item, options, delimit=true) {
       return match.slice(1, match.length - 1);
     });
   } else if (typeof item === 'function') {
-    result = options.detectFunctions ?
-      item.name && (item.name !== options.key) ? item.name : item.toString() :
-      '...';
+    result = options.useFunctionCode ?
+      options.functionNameOnly ?
+        item.name.toString() : item.toString() : `...`;
   }
   return result;
 }

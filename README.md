@@ -33,6 +33,61 @@ console.log(jsxToString(<Basic test1="test" />)); //outputs: <Basic test1="test"
   1. The default value for function is `...`. Use `keyValueOverride` for custom key values.
 
 ### Options
+  * useFunctionCode (boolean)
+
+    Optional. Defaults to false. Whether or not to use the function actual source code instead of `...`
+
+    For example:
+
+```js
+import React from 'react';
+import jsxToString from 'jsx-to-string';
+//or var jsxToString = require('jsx-to-string');
+
+let Basic = React.createClass({
+  render() {
+    return (
+      <div />
+    );
+  }
+}); //this is your react component
+
+let _onClickHandler = function () {
+  //no-op
+}
+console.log(jsxToString(<Basic onClick={_onClickHandler} />, {
+  useFunctionCode: true
+})); //outputs: <Basic onClick={function _onClickHandler() { //no-op }} />
+```
+
+* functionNameOnly (boolean)
+
+  Optional. Defaults to false. Whether prop function values should contain only the name.
+  This flag will only be used if `useFunctionCode` is true.
+
+  For example:
+
+```js
+import React from 'react';
+import jsxToString from 'jsx-to-string';
+//or var jsxToString = require('jsx-to-string');
+
+let Basic = React.createClass({
+render() {
+  return (
+    <div />
+  );
+}
+}); //this is your react component
+
+let _onClickHandler = function () {
+//no-op
+}
+console.log(jsxToString(<Basic onClick={_onClickHandler} />, {
+  functionNameOnly: true,
+  useFunctionCode: true
+})); //outputs: <Basic onClick={_onClickHandler} />
+```
 
   * keyValueOverride (object)
 
