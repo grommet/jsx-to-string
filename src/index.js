@@ -92,8 +92,16 @@ function jsxToString (component, options) {
           component.props[key]) &&
         opts.ignoreProps.indexOf(key) === -1)
     }).map(key => {
-      let value = opts.keyValueOverride[key] ||
-        serializeItem(component.props[key], {...opts, key});
+      let value;
+
+      if (typeof opts.keyValueOverride[key] === 'function') {
+        value = opts.keyValueOverride[key](component.props[key]);
+      } else if (opts.keyValueOverride[key]) {
+        value = opts.keyValueOverride[key]
+      } else {
+        value = serializeItem(component.props[key], {...opts, key});
+      }
+
       if (typeof value !== 'string' || value[0] !== "'") {
         value = `{${value}}`;
       }
