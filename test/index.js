@@ -49,6 +49,14 @@ test('test a basic react component with default props', function(t) {
   t.equal(output, '<DefaultProp test=\'abc\' />');
 });
 
+test('test a basic react component with key props', function(t) {
+  t.plan(1);
+
+  let output = jsxToString(<DefaultProp key="abc" />);
+
+  t.equal(output, '<DefaultProp key=\'abc\' />');
+});
+
 test('test a react component with basic props', function(t) {
   t.plan(1);
 

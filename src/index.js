@@ -75,16 +75,16 @@ function jsxToString (component, options) {
     detectFunctions: false
   };
 
-  let opts = {...baseOpts, ...options};
+  const opts = {...baseOpts, ...options};
 
-  let componentData = {
+  const componentData = {
     name: opts.displayName
   };
 
   delete opts.displayName;
 
   if (component.props) {
-    var indentation = new Array(opts.spacing + 3).join(' ');
+    const indentation = new Array(opts.spacing + 3).join(' ');
     componentData.props = Object.keys(component.props)
     .filter(key => {
       return (key !== 'children' &&
@@ -99,6 +99,10 @@ function jsxToString (component, options) {
       }
       return `${key}=${value}`;
     }).join(`\n${indentation}`);
+    if (component.key) {
+      componentData.props += `key='${component.key}'`;
+    }
+
     if (componentData.props.length > 0) {
       componentData.props = ' ' + componentData.props;
     }
@@ -106,7 +110,7 @@ function jsxToString (component, options) {
 
   if (component.props.children) {
     opts.spacing += 2;
-    let indentation = new Array(opts.spacing + 1).join(' ');
+    const indentation = new Array(opts.spacing + 1).join(' ');
     if (Array.isArray(component.props.children)) {
       componentData.children = component.props.children
       .reduce((a, b) => a.concat(b), []) // handle Array of Arrays
