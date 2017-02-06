@@ -126,6 +126,35 @@ test('test a react component with custom name function', function(t) {
   t.equal(output, '<Basic test1={_testCallBack1}\n  test2={_testCallBack2} />');
 });
 
+test('test a react component with dynamic keyValueOverride', function(t) {
+  t.plan(2);
+
+  const keyValueOverride = {
+    test1: function (propValue) {
+      if (typeof propValue === 'function') {
+        return propValue.name
+      } else {
+        return '_thisIsNotAFunction';
+      }
+    }
+  };
+
+  function testCallback() {
+    //no-op
+  };
+
+  let output1 = jsxToString(
+    <Basic test1={testCallback} />, { keyValueOverride }
+  );
+
+  let output2 = jsxToString(
+    <Basic test1={'Not a function'} />, { keyValueOverride }
+  );
+
+  t.equal(output1, '<Basic test1={testCallback} />');
+  t.equal(output2, '<Basic test1={_thisIsNotAFunction} />');
+});
+
 test('test a react component with function code enabled', function(t) {
   t.plan(1);
 
