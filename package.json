@@ -1,6 +1,6 @@
 {
   "name": "jsx-to-string",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Parse your React JSX component to string",
   "main": "lib/index.js",
   "scripts": {
