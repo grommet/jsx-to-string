@@ -1,6 +1,7 @@
 import React from 'react';
 import jsxToString from '../src/index';
 import test from 'tape';
+import { fromJS } from 'immutable';
 
 let Basic = React.createClass({
   render() {
@@ -322,4 +323,37 @@ test('test a react component with undefined prop', function(t) {
   );
 
   t.equal(output, '<Basic prop={undefined} />');
+});
+
+test('test a react component with immutable prop', function(t) {
+  t.plan(1);
+
+  const imm = fromJS({test: 'abc'});
+  let output = jsxToString(
+    <Basic prop={imm} />
+  );
+
+  t.equal(output, '<Basic prop={{"test": "abc"}} />');
+});
+
+test('test a react component with multiple children and immutable props', function(t) {
+  t.plan(1);
+
+  const imm = fromJS({test: 'abc'});
+  let output = jsxToString(
+    <Basic>
+      <BasicChild>
+        <BasicChild props={imm}>
+          <BasicChild>
+            Title
+          </BasicChild>
+          <BasicChild>
+            Title 2
+          </BasicChild>
+        </BasicChild>
+      </BasicChild>
+    </Basic>
+  );
+
+  t.equal(output, '<Basic>\n  <BasicChild>\n    <BasicChild props={{"test": "abc"}}>\n      <BasicChild>\n        Title\n      </BasicChild>\n      <BasicChild>\n        Title 2\n      </BasicChild>\n    </BasicChild>\n  </BasicChild>\n</Basic>');
 });
