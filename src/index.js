@@ -1,5 +1,6 @@
 import React from 'react';
 import stringify from 'json-stringify-pretty-compact';
+import { isImmutable } from 'immutable';
 
 function isDefaultProp (defaultProps, key, value) {
   if (!defaultProps) {
@@ -39,7 +40,9 @@ const _JSX_REGEXP = /"<.+>"/g;
 
 function serializeItem (item, options, delimit=true) {
   let result;
-  if (typeof item === 'string') {
+  if (isImmutable(item)) {
+    result = serializeItem(item.toJS(), options, delimit);
+  } else if (typeof item === 'string') {
     result = delimit ? `'${item}'` : item;
   } else if (typeof item === 'number' || typeof item === 'boolean') {
     result = `${item}`;

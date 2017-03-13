@@ -25,8 +25,9 @@
   },
   "homepage": "https://github.com/alansouzati/jsx-to-string#readme",
   "dependencies": {
-    "react": "^0.14.0",
-    "json-stringify-pretty-compact": "^1.0.1"
+    "immutable": "4.0.0-rc.2",
+    "json-stringify-pretty-compact": "^1.0.1",
+    "react": "^0.14.0"
   },
   "devDependencies": {
     "babel-cli": "^6.1.18",
