@@ -75,7 +75,8 @@ function jsxToString (component, options) {
     ignoreProps: [],
     keyValueOverride: {},
     spacing: 0,
-    detectFunctions: false
+    detectFunctions: false,
+    useSelfClosingTags: true
   };
 
   const opts = {...baseOpts, ...options};
@@ -136,8 +137,10 @@ function jsxToString (component, options) {
     return `<${componentData.name}${componentData.props}>\n` +
       `${indentation}${componentData.children}\n` +
       `${indentation.slice(0, -2)}</${componentData.name}>`;
-  } else {
+  } else if (opts.useSelfClosingTags) {
     return `<${componentData.name}${componentData.props} />`;
+  } else {
+    return `<${componentData.name}${componentData.props}></${componentData.name}>`;
   }
 }
 
