@@ -356,4 +356,11 @@ test('test a react component with multiple children and immutable props', functi
   );
 
   t.equal(output, '<Basic>\n  <BasicChild>\n    <BasicChild props={{"test": "abc"}}>\n      <BasicChild>\n        Title\n      </BasicChild>\n      <BasicChild>\n        Title 2\n      </BasicChild>\n    </BasicChild>\n  </BasicChild>\n</Basic>');
+
+  test('test conversion of self-closing tags to non self-closing', function(t) {
+     t.plan(1);
+
+     const output = jsxToString(<Basic />, { useSelfClosingTags: false });
+     t.equal(output, '<Basic></Basic>');
+  });
 });
