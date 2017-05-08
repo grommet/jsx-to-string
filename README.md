@@ -160,6 +160,17 @@ console.log(jsxToString(<Basic test1="ignore" />, {
 })); //outputs: <CustomName />
 ```
 
+  * useSelfClosingTags (boolean)
+
+    Optional. Defaults to true. Determines whether to use self-closing HTML tags where possible in the output. For example:
+
+```js
+import jsxToString from 'jsx-to-string';
+
+console.log(jsxToString(<Basic />), { useSelfClosingTags: true }); // outputs <Basic />
+console.log(jsxToString(<Basic />), { useSelfClosingTags: false }); // outputs <Basic></Basic>
+```
+
 ### License
 
 [MIT](https://github.com/alansouzati/jsx-to-string/blob/master/LICENSE)
