@@ -123,6 +123,13 @@ function jsxToString (component, options) {
       if (typeof value !== 'string' || value[0] !== "'") {
         value = `{${value}}`;
       }
+
+      // Is `value` a multi-line string?
+      const valueLines = value.split(/\r\n|\r|\n/);
+      if (valueLines.length > 1) {
+        value = valueLines.join(`\n${indentation}`);
+      }
+
       return `${key}=${value}`;
     }).join(`\n${indentation}`);
 
