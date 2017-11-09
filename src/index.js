@@ -40,6 +40,7 @@ const _JSX_REGEXP = /"<.+>"/g;
 
 function serializeItem (item, options, delimit=true) {
   let result;
+
   if (isImmutable(item)) {
     result = serializeItem(item.toJS(), options, delimit);
   } else if (typeof item === 'string') {
@@ -73,6 +74,7 @@ function jsxToString (component, options) {
     displayName: component.type.displayName || component.type.name ||
       component.type,
     ignoreProps: [],
+    ignoreTags: [],
     keyValueOverride: {},
     spacing: 0,
     detectFunctions: false
@@ -80,12 +82,16 @@ function jsxToString (component, options) {
 
   const opts = {...baseOpts, ...options};
 
+  // Do not return anything if the root tag should be ignored
+  if (opts.ignoreTags.indexOf(opts.displayName) !== -1) {
+    return '';
+  }
+
   const componentData = {
     name: opts.displayName
   };
 
   delete opts.displayName;
-
   if (component.props) {
     const indentation = new Array(opts.spacing + 3).join(' ');
     componentData.props = Object.keys(component.props)
@@ -96,7 +102,6 @@ function jsxToString (component, options) {
         opts.ignoreProps.indexOf(key) === -1)
     }).map(key => {
       let value;
-
       if (typeof opts.keyValueOverride[key] === 'function') {
         value = opts.keyValueOverride[key](component.props[key]);
       } else if (opts.keyValueOverride[key]) {
@@ -126,7 +131,13 @@ function jsxToString (component, options) {
     if (Array.isArray(component.props.children)) {
       componentData.children = component.props.children
       .reduce((a, b) => a.concat(b), []) // handle Array of Arrays
-      .filter(child => child)
+      .filter(child => {
+        const childShouldBeRemoved = child &&
+          child.type &&
+          opts.ignoreTags.indexOf(child.type.displayName || child.type.name || child.type) === -1;
+        // Filter the tag if it is in the ignoreTags list or if is not a tag
+        return childShouldBeRemoved;
+      })
       .map(child => serializeItem(child, opts, false))
       .join(`\n${indentation}`);
     } else {
