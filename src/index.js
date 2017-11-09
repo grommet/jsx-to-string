@@ -134,9 +134,9 @@ function jsxToString (component, options) {
       .filter(child => {
         const childShouldBeRemoved = child &&
           child.type &&
-          opts.ignoreTags.indexOf(child.type.displayName || child.type.name || child.type) === -1
+          opts.ignoreTags.indexOf(child.type.displayName || child.type.name || child.type) === -1;
         // Filter the tag if it is in the ignoreTags list or if is not a tag
-        return childShouldBeRemoved
+        return childShouldBeRemoved;
       })
       .map(child => serializeItem(child, opts, false))
       .join(`\n${indentation}`);
