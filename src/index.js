@@ -84,7 +84,7 @@ function jsxToString (component, options) {
 
   // Do not return anything if the root tag should be ignored
   if (opts.ignoreTags.indexOf(opts.displayName) !== -1) {
-    return ''
+    return '';
   }
 
   const componentData = {
