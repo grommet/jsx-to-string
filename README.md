@@ -138,6 +138,28 @@ console.log(jsxToString(<Basic test1="ignore" />, {
 })); //outputs: <Basic />
 ```
 
+  * ignoreTags (array)
+
+    An array of string tags that should be ignored from the JSX string. For example:
+
+```js
+import React from 'react';
+import jsxToString from 'jsx-to-string';
+//or var jsxToString = require('jsx-to-string');
+
+let Basic = React.createClass({
+  render() {
+    return (
+      <div />
+    );
+  }
+}); //this is your react component
+
+console.log(jsxToString(<Basic><svg /><img /><p>I am alone</p></Basic>, {
+  ignoreTags: ['svg', 'img']
+})); //outputs: <Basic><p>I am alone</p></Basic>
+```
+
   * displayName (string)
 
     A custom value to be used as the component name. For example:

@@ -357,3 +357,63 @@ test('test a react component with multiple children and immutable props', functi
 
   t.equal(output, '<Basic>\n  <BasicChild>\n    <BasicChild props={{"test": "abc"}}>\n      <BasicChild>\n        Title\n      </BasicChild>\n      <BasicChild>\n        Title 2\n      </BasicChild>\n    </BasicChild>\n  </BasicChild>\n</Basic>');
 });
+
+test('test a react single component with ignore tags', function(t) {
+  t.plan(1);
+
+  let output = jsxToString(
+    <Basic>
+      <p>Test</p>
+    </Basic>,
+    {
+      ignoreTags: ['Basic']
+    }
+  );
+
+  t.equal(output, '');
+});
+
+test('test a react component with multiple ignore tags', function(t) {
+  t.plan(1);
+
+  let output = jsxToString(
+    <Basic>
+      <svg />
+      <p>Test</p>
+      <img />
+      <BasicChild />
+    </Basic>,
+    {
+      ignoreTags: ['svg', 'img', 'BasicChild']
+    }
+  );
+
+  t.equal(output, '<Basic>\n  <p>\n    Test\n  </p>\n</Basic>');
+});
+
+test('test a deep react component with multiple ignore tags', function(t) {
+  t.plan(1);
+
+  let output = jsxToString(
+    <Basic>
+      <svg />
+      <p>
+        Title 1
+        <svg />
+        <div>
+          <p>Title 2</p>
+          <img />
+        </div>
+        <BasicChild>
+          Title 3
+        </BasicChild>
+      </p>
+      <img />
+    </Basic>,
+    {
+      ignoreTags: ['svg', 'img']
+    }
+  );
+
+  t.equal(output, '<Basic>\n  <p>\n    <div>\n      <p>\n        Title 2\n      </p>\n    </div>\n    <BasicChild>\n      Title 3\n    </BasicChild>\n  </p>\n</Basic>');
+});
