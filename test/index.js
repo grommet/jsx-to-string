@@ -423,7 +423,7 @@ test('test a react component with boolean props and shortBooleanSyntax on', func
 
   let output = jsxToString(
     <Basic test="abc" test2={4} test4={true}
-      test5={{abc: "abc"}} test6="">
+      test5={{abc: "abc"}} test6="" test7={false} test8>
       <BasicChild test1 test2={false} test3={5} test4={6}>
         Title 1
       </BasicChild>
@@ -433,5 +433,5 @@ test('test a react component with boolean props and shortBooleanSyntax on', func
     }
   );
 
-  t.equal(output, '<Basic test=\'abc\'\n  test2={4}\n  test4\n  test5={{"abc": "abc"}}\n  test6=\'\'>\n  <BasicChild test1\n    test3={5}\n    test4={6}>\n    Title 1\n  </BasicChild>\n</Basic>');
+  t.equal(output, '<Basic test=\'abc\'\n  test2={4}\n  test4\n  test5={{"abc": "abc"}}\n  test6=\'\'\n  test8>\n  <BasicChild test1\n    test3={5}\n    test4={6}>\n    Title 1\n  </BasicChild>\n</Basic>');
 });

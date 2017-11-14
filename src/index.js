@@ -106,15 +106,17 @@ function jsxToString (component, options) {
         value = opts.keyValueOverride[key](component.props[key]);
       } else if (opts.keyValueOverride[key]) {
         value = opts.keyValueOverride[key]
+      } else if (opts.shortBooleanSyntax && typeof component.props[key] === 'boolean') {
+        if (component.props[key]) return key;
+        return;
       } else {
         value = serializeItem(component.props[key], {...opts, key});
       }
-
       if (typeof value !== 'string' || value[0] !== "'") {
         value = `{${value}}`;
       }
       return `${key}=${value}`;
-    }).join(`\n${indentation}`);
+    }).filter(key => key).join(`\n${indentation}`);
 
     if (component.key && opts.ignoreProps.indexOf('key') === -1) {
       componentData.props += `key='${component.key}'`;
