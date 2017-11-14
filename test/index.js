@@ -417,3 +417,21 @@ test('test a deep react component with multiple ignore tags', function(t) {
 
   t.equal(output, '<Basic>\n  <p>\n    <div>\n      <p>\n        Title 2\n      </p>\n    </div>\n    <BasicChild>\n      Title 3\n    </BasicChild>\n  </p>\n</Basic>');
 });
+
+test('test a react component with boolean props and shortBooleanSyntax on', function(t) {
+  t.plan(1);
+
+  let output = jsxToString(
+    <Basic test="abc" test2={4} test4={true}
+      test5={{abc: "abc"}} test6="">
+      <BasicChild test1 test2={false} test3={5} test4={6}>
+        Title 1
+      </BasicChild>
+    </Basic>,
+    {
+      shortBooleanSyntax: true,
+    }
+  );
+
+  t.equal(output, '<Basic test=\'abc\'\n  test2={4}\n  test4\n  test5={{"abc": "abc"}}\n  test6=\'\'>\n  <BasicChild test1\n    test3={5}\n    test4={6}>\n    Title 1\n  </BasicChild>\n</Basic>');
+});
