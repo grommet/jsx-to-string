@@ -428,7 +428,7 @@ test('test a simple react component with boolean props and shortBooleanSyntax on
     }
   );
 
-  t.equal(output, '<Basic test\n  test3 />');
+  t.equal(output, '<Basic test\n  test2={false}\n  test3 />');
 });
 
 test('test a complex react component with boolean props and shortBooleanSyntax on', function(t) {
@@ -446,5 +446,5 @@ test('test a complex react component with boolean props and shortBooleanSyntax o
     }
   );
 
-  t.equal(output, '<Basic test=\'abc\'\n  test2={4}\n  test4\n  test5={{"abc": "abc"}}\n  test6=\'\'\n  test8>\n  <BasicChild test1\n    test3={5}\n    test4={6}>\n    Title 1\n  </BasicChild>\n</Basic>');
+  t.equal(output, '<Basic test=\'abc\'\n  test2={4}\n  test4\n  test5={{"abc": "abc"}}\n  test6=\'\'\n  test7={false}\n  test8>\n  <BasicChild test1\n    test2={false}\n    test3={5}\n    test4={6}>\n    Title 1\n  </BasicChild>\n</Basic>');
 });
