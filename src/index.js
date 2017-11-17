@@ -115,7 +115,7 @@ function jsxToString (component, options) {
         value = `{${value}}`;
       }
       return `${key}=${value}`;
-    }).filter(key => key).join(`\n${indentation}`);
+    }).join(`\n${indentation}`);
 
     if (component.key && opts.ignoreProps.indexOf('key') === -1) {
       componentData.props += `key='${component.key}'`;
