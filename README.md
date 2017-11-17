@@ -179,7 +179,7 @@ let Basic = React.createClass({
 
 console.log(jsxToString(<Basic test test2={false} test3={true}>, {
   shortBooleanSyntax: true,
-})); //outputs: <Basic test test3 />
+})); //outputs: <Basic test test2={false} test3 />
 ```
 
   * displayName (string)
