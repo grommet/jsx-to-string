@@ -107,7 +107,7 @@ function jsxToString (component, options) {
       } else if (opts.keyValueOverride[key]) {
         value = opts.keyValueOverride[key]
       } else if (opts.shortBooleanSyntax && typeof component.props[key] === 'boolean' && component.props[key]) {
-        if (component.props[key]) return key;
+        return key;
       } else {
         value = serializeItem(component.props[key], {...opts, key});
       }
