@@ -9,6 +9,24 @@ function isDefaultProp (defaultProps, key, value) {
   return defaultProps[key] === value;
 }
 
+function stringifyFunction (item, opts) {
+  let value = `...`;
+
+  if (opts.useFunctionCode) {
+    if (opts.functionNameOnly) {
+      if (typeof item.displayName !== 'undefined') {
+        value = item.displayName.toString();
+      } else {
+        value = item.name.toString();
+      }
+    } else {
+      value = item.toString();
+    }
+  }
+  
+  return value;
+}
+
 function stringifyObject (object, opts) {
   let result;
   if (Array.isArray(object)) {
@@ -24,15 +42,14 @@ function stringifyObject (object, opts) {
       } else if (typeof value === 'object') {
         value = stringifyObject(value, opts);
       } else if (typeof value === 'function') {
-        value = opts.useFunctionCode ?
-          opts.functionNameOnly ?
-            item.name.toString() : item.toString() : `...`;
+        value = stringifyFunction(value, opts);
       }
       result[key] = value;
     });
   } else {
     result = object;
   }
+
   return result;
 }
 
@@ -61,9 +78,7 @@ function serializeItem (item, options, delimit=true) {
       return match.slice(1, match.length - 1);
     });
   } else if (typeof item === 'function') {
-    result = options.useFunctionCode ?
-      options.functionNameOnly ?
-        item.name.toString() : item.toString() : `...`;
+    result = stringifyFunction(item, options);
   }
   return result;
 }
@@ -114,6 +129,13 @@ function jsxToString (component, options) {
       if (typeof value !== 'string' || value[0] !== "'") {
         value = `{${value}}`;
       }
+
+      // Is `value` a multi-line string?
+      const valueLines = value.split(/\r\n|\r|\n/);
+      if (valueLines.length > 1) {
+        value = valueLines.join(`\n${indentation}`);
+      }
+
       return `${key}=${value}`;
     }).join(`\n${indentation}`);
 
