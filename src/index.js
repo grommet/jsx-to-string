@@ -44,7 +44,7 @@ function serializeItem (item, options, delimit=true) {
   if (isImmutable(item)) {
     result = serializeItem(item.toJS(), options, delimit);
   } else if (typeof item === 'string') {
-    result = delimit ? `'${item}'` : item;
+    result = delimit ? `"${item}"` : item;
   } else if (typeof item === 'number' || typeof item === 'boolean') {
     result = `${item}`;
   } else if (Array.isArray(item)) {
@@ -111,14 +111,14 @@ function jsxToString (component, options) {
       } else {
         value = serializeItem(component.props[key], {...opts, key});
       }
-      if (typeof value !== 'string' || value[0] !== "'") {
+      if (typeof value !== 'string' || value[0] !== '"') {
         value = `{${value}}`;
       }
       return `${key}=${value}`;
     }).join(`\n${indentation}`);
 
     if (component.key && opts.ignoreProps.indexOf('key') === -1) {
-      componentData.props += `key='${component.key}'`;
+      componentData.props += `key="${component.key}"`;
     }
 
     if (componentData.props.length > 0) {
