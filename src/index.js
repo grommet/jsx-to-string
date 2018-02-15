@@ -26,7 +26,7 @@ function stringifyObject (object, opts) {
       } else if (typeof value === 'function') {
         value = opts.useFunctionCode ?
           opts.functionNameOnly ?
-            item.name.toString() : item.toString() : `...`;
+          value.name.toString() : value.toString() : `...`;
       }
       result[key] = value;
     });
