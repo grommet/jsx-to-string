@@ -170,7 +170,7 @@ test('test a react component with function code enabled', function(t) {
   );
 
   t.equal(
-    output, '<Basic test1={function _testCallBack1() {\n    //no-op\n  }} />'
+    output, '<Basic test1={function _testCallBack1() {\n      //no-op\n    }} />'
   );
 });
 
