@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { isValidElement } from 'react';
 import stringify from 'json-stringify-pretty-compact';
 import { isImmutable } from 'immutable';
 
@@ -17,7 +17,7 @@ function stringifyObject (object, opts) {
     result = {};
     Object.keys(object).map(key => {
       let value = object[key];
-      if (React.isValidElement(value)) {
+      if (isValidElement(value)) {
         value = jsxToString(value, opts);
       } else if (Array.isArray(value)) {
         value = value.map(item => stringifyObject(item, opts));
@@ -52,7 +52,7 @@ function serializeItem (item, options, delimit=true) {
     const delimiter = delimit ? ', ' : `\n${indentation}`;
     const items = item.map(i => serializeItem(i, options)).join(delimiter);
     result = delimit ? `[${items}]` : `${items}` ;
-  } else if (React.isValidElement(item)) {
+  } else if (isValidElement(item)) {
     result = jsxToString(item, options);
   } else if (typeof item === 'object') {
     result = stringify(stringifyObject(item, options));
@@ -138,6 +138,9 @@ function jsxToString (component, options) {
       componentData.children = component.props.children
       .reduce((a, b) => a.concat(b), []) // handle Array of Arrays
       .filter(child => {
+        if (child && !isValidElement(child)) {
+          return true;
+        }
         const childShouldBeRemoved = child &&
           child.type &&
           opts.ignoreTags.indexOf(child.type.displayName || child.type.name || child.type) === -1;

@@ -1,0 +1,168 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`test a basic react component 1`] = `"<Basic />"`;
+
+exports[`test a basic react component with default props 1`] = `"<DefaultProp test='abc' />"`;
+
+exports[`test a basic react component with key props 1`] = `"<DefaultProp key='abc' />"`;
+
+exports[`test a complex react component with boolean props and shortBooleanSyntax on 1`] = `
+"<Basic test='abc'
+  test2={4}
+  test4
+  test5={{\\"abc\\": \\"abc\\"}}
+  test6=''
+  test7={false}
+  test8>
+  <BasicChild test1
+    test2={false}
+    test3={5}
+    test4={6}>
+    Title 1
+  </BasicChild>
+</Basic>"
+`;
+
+exports[`test a react component with a null children 1`] = `
+"<Basic>
+  <BasicChild>
+    <BasicChild>
+      <BasicChild>
+        Title 2
+      </BasicChild>
+    </BasicChild>
+  </BasicChild>
+</Basic>"
+`;
+
+exports[`test a react component with basic props 1`] = `
+"<Basic test='abc'
+  test2={4}
+  test4={true}
+  test5={{\\"abc\\": \\"abc\\"}}
+  test6='' />"
+`;
+
+exports[`test a react component with custom displayName 1`] = `"<CustomDisplayName />"`;
+
+exports[`test a react component with custom name function 1`] = `
+"<Basic test1={_testCallBack1}
+  test2={_testCallBack2} />"
+`;
+
+exports[`test a react component with dynamic keyValueOverride 1`] = `"<Basic test1={testCallback} />"`;
+
+exports[`test a react component with dynamic keyValueOverride 2`] = `"<Basic test1={_thisIsNotAFunction} />"`;
+
+exports[`test a react component with function code enabled 1`] = `
+"<Basic test1={function _testCallBack1() {
+      //no-op
+    }} />"
+`;
+
+exports[`test a react component with function name enabled 1`] = `"<Basic test1={_testCallBack1} />"`;
+
+exports[`test a react component with function props 1`] = `"<Basic test1={...} />"`;
+
+exports[`test a react component with ignore props 1`] = `
+"<Basic>
+  Test
+</Basic>"
+`;
+
+exports[`test a react component with immutable prop 1`] = `"<Basic prop={{\\"test\\": \\"abc\\"}} />"`;
+
+exports[`test a react component with multiple children 1`] = `
+"<Basic>
+  <BasicChild>
+    <BasicChild>
+      <BasicChild>
+        Title
+      </BasicChild>
+      <BasicChild>
+        Title 2
+      </BasicChild>
+    </BasicChild>
+  </BasicChild>
+</Basic>"
+`;
+
+exports[`test a react component with multiple children and immutable props 1`] = `
+"<Basic>
+  <BasicChild>
+    <BasicChild props={{\\"test\\": \\"abc\\"}}>
+      <BasicChild>
+        Title
+      </BasicChild>
+      <BasicChild>
+        Title 2
+      </BasicChild>
+    </BasicChild>
+  </BasicChild>
+</Basic>"
+`;
+
+exports[`test a react component with multiple ignore tags 1`] = `
+"<Basic>
+  <p>
+    Test
+  </p>
+</Basic>"
+`;
+
+exports[`test a react component with null prop 1`] = `
+<Basic
+  prop={null}
+/>
+`;
+
+exports[`test a react component with react children 1`] = `
+"<Basic>
+  <BasicChild />
+</Basic>"
+`;
+
+exports[`test a react component with react props 1`] = `"<Basic test1={<Basic />} />"`;
+
+exports[`test a react component with spread operator 1`] = `
+"<Basic prop1={true}
+  prop2='active' />"
+`;
+
+exports[`test a react component with text children 1`] = `
+"<Basic>
+  Test
+</Basic>"
+`;
+
+exports[`test a react component with undefined prop 1`] = `
+<Basic
+  prop={undefined}
+/>
+`;
+
+exports[`test a react single component with ignore tags 1`] = `
+"<div>
+  <span>
+    test
+  </span>
+</div>"
+`;
+
+exports[`test a simple react component with boolean props and shortBooleanSyntax on 1`] = `
+"<Basic test
+  test2={false}
+  test3 />"
+`;
+
+exports[`test nested components with text in between 1`] = `
+"<div>
+  one
+  <div>
+    two
+    <span>
+      three
+    </span>
+  </div>
+</div>"
+`;
