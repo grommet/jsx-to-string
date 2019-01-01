@@ -225,7 +225,7 @@ console.log(jsxToString(<Basic test1="prop1" test2="prop2">child</Basic>, {
   singleLineProps: true
 }));
 //outputs:
-//<Basic test1="prop1" test2="prop2">
+//<Basic test1='prop1' test2='prop2'>
 //  child
 //</Basic>
 ```
