@@ -77,7 +77,8 @@ function jsxToString (component, options) {
     ignoreTags: [],
     keyValueOverride: {},
     spacing: 0,
-    detectFunctions: false
+    detectFunctions: false,
+    singleLineProps: false
   };
 
   const opts = {...baseOpts, ...options};
@@ -120,7 +121,7 @@ function jsxToString (component, options) {
         value = valueLines.join(`\n${indentation}`);
       }
       return `${key}=${value}`;
-    }).join(`\n${indentation}`);
+    }).join(opts.singleLineProps ? ' ' : `\n${indentation}`);
 
     if (component.key && opts.ignoreProps.indexOf('key') === -1) {
       componentData.props += `key='${component.key}'`;
