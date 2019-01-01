@@ -204,6 +204,32 @@ console.log(jsxToString(<Basic test1="ignore" />, {
 })); //outputs: <CustomName />
 ```
 
+  * singleLineProps (boolean)
+
+    Optional. Defaults to false. Prints props on a single line when the component has children.
+
+```js
+import React from 'react';
+import jsxToString from 'jsx-to-string';
+//or var jsxToString = require('jsx-to-string');
+
+let Basic = React.createClass({
+  render() {
+    return (
+      <div />
+    );
+  }
+}); //this is your react component
+
+console.log(jsxToString(<Basic test1="prop1" test2="prop2">child</Basic>, {
+  singleLineProps: true
+}));
+//outputs:
+//<Basic test1="prop1" test2="prop2">
+//  child
+//</Basic>
+```
+
 ### License
 
 [MIT](https://github.com/alansouzati/jsx-to-string/blob/master/LICENSE)
