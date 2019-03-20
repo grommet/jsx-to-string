@@ -55,8 +55,7 @@ exports[`test a react component with dynamic keyValueOverride 1`] = `"<Basic tes
 exports[`test a react component with dynamic keyValueOverride 2`] = `"<Basic test1={_thisIsNotAFunction} />"`;
 
 exports[`test a react component with function code enabled 1`] = `
-"<Basic test1={function _testCallBack1() {
-      //no-op
+"<Basic test1={function _testCallBack1() {//no-op
     }} />"
 `;
 
@@ -135,11 +134,7 @@ exports[`test a react component with text children 1`] = `
 </Basic>"
 `;
 
-exports[`test a react component with undefined prop 1`] = `
-<Basic
-  prop={undefined}
-/>
-`;
+exports[`test a react component with undefined prop 1`] = `<Basic />`;
 
 exports[`test a react single component with ignore tags 1`] = `
 "<div>
