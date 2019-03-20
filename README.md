@@ -17,13 +17,11 @@ import React from 'react';
 import jsxToString from 'jsx-to-string';
 // or var jsxToString = require('jsx-to-string');
 
-let Basic = React.createClass({
-  render() {
-    return (
-      <div />
-    );
-  }
-}); //this is your react component
+function Basic() {
+  return (
+    <div />
+  );
+} //this is your react component
 
 console.log(jsxToString(<Basic test1="test" />)); //outputs: <Basic test1="test" />
 ```
@@ -44,13 +42,11 @@ import React from 'react';
 import jsxToString from 'jsx-to-string';
 //or var jsxToString = require('jsx-to-string');
 
-let Basic = React.createClass({
-  render() {
-    return (
-      <div />
-    );
-  }
-}); //this is your react component
+function Basic() {
+  return (
+    <div />
+  );
+} //this is your react component
 
 let _onClickHandler = function () {
   //no-op
@@ -72,13 +68,11 @@ import React from 'react';
 import jsxToString from 'jsx-to-string';
 //or var jsxToString = require('jsx-to-string');
 
-let Basic = React.createClass({
-render() {
+function Basic() {
   return (
     <div />
   );
-}
-}); //this is your react component
+} //this is your react component
 
 let _onClickHandler = function () {
 //no-op
@@ -98,13 +92,11 @@ import React from 'react';
 import jsxToString from 'jsx-to-string';
 //or var jsxToString = require('jsx-to-string');
 
-let Basic = React.createClass({
-  render() {
-    return (
-      <div />
-    );
-  }
-}); //this is your react component
+function Basic() {
+  return (
+    <div />
+  );
+} //this is your react component
 
 let _onClickHandler = function () {
   //no-op
@@ -125,13 +117,11 @@ import React from 'react';
 import jsxToString from 'jsx-to-string';
 //or var jsxToString = require('jsx-to-string');
 
-let Basic = React.createClass({
-  render() {
-    return (
-      <div />
-    );
-  }
-}); //this is your react component
+function Basic() {
+  return (
+    <div />
+  );
+} //this is your react component
 
 console.log(jsxToString(<Basic test1="ignore" />, {
   ignoreProps: ['test1']
@@ -147,13 +137,11 @@ import React from 'react';
 import jsxToString from 'jsx-to-string';
 //or var jsxToString = require('jsx-to-string');
 
-let Basic = React.createClass({
-  render() {
-    return (
-      <div />
-    );
-  }
-}); //this is your react component
+function Basic() {
+  return (
+    <div />
+  );
+} //this is your react component
 
 console.log(jsxToString(<Basic><svg /><img /><p>I am alone</p></Basic>, {
   ignoreTags: ['svg', 'img']
@@ -169,13 +157,11 @@ import React from 'react';
 import jsxToString from 'jsx-to-string';
 //or var jsxToString = require('jsx-to-string');
 
-let Basic = React.createClass({
-  render() {
-    return (
-      <div />
-    );
-  }
-}); //this is your react component
+function Basic() {
+  return (
+    <div />
+  );
+} //this is your react component
 
 console.log(jsxToString(<Basic test test2={false} test3={true}>, {
   shortBooleanSyntax: true,
@@ -191,13 +177,11 @@ import React from 'react';
 import jsxToString from 'jsx-to-string';
 //or var jsxToString = require('jsx-to-string');
 
-let Basic = React.createClass({
-  render() {
-    return (
-      <div />
-    );
-  }
-}); //this is your react component
+function Basic() {
+  return (
+    <div />
+  );
+} //this is your react component
 
 console.log(jsxToString(<Basic test1="ignore" />, {
   displayName: 'CustomName'
