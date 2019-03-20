@@ -2,36 +2,24 @@ import React from 'react';
 import jsxToString from '../src/index';
 import { fromJS } from 'immutable';
 
-const Basic = React.createClass({
-  render() {
-    return (
-      <div />
-    );
-  }
-});
+function Basic() {
+  return (
+    <div />
+  );
+}
 
-const DefaultProp = React.createClass({
+function DefaultProp(props) {
+  return <div />;
+}
+DefaultProp.defaultProps = {
+  test2: "abc"
+};
 
-  getDefaultProps() {
-    return {
-      test2: 'abc'
-    };
-  },
-
-  render() {
-    return (
-      <div />
-    );
-  }
-});
-
-const BasicChild = React.createClass({
-  render() {
-    return (
-      <div />
-    );
-  }
-});
+function BasicChild() {
+  return (
+    <div />
+  );
+}
 
 test('test a basic react component', () => (
   expect(jsxToString(<Basic />)).toMatchSnapshot()
