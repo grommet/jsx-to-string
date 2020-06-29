@@ -72,6 +72,8 @@ function jsxToString (component, options) {
 
   const baseOpts = {
     displayName: component.type.displayName || component.type.name ||
+      // get the name of a forwardRef component (must be a named function - see: https://reactjs.org/docs/forwarding-refs.html#displaying-a-custom-name-in-devtools)
+      (component.type.render && component.type.render.name) ||
       component.type,
     ignoreProps: [],
     ignoreTags: [],
